@@ -1,88 +1,595 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Daily Devotion - BRGH QT</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <style>
-            .img-fluid {
-            max-width: 100%;
-            height: auto;
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Daily Devotion - BRGH QT</title>
+    <meta name="description" content="BRGH Daily Devotion - encouraging a closer and deeper walk with the Lord daily through structured quiet time.">
+    <link rel="icon" type="image/jpeg" href="images/daily_devo_logo.jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --color-bg: #f7f5f0;
+            --color-surface: #ffffff;
+            --color-navy: #1a2744;
+            --color-navy-light: #2a3d66;
+            --color-gold: #c4a54d;
+            --color-gold-muted: #d4ba6a;
+            --color-text: #2b2b2b;
+            --color-text-muted: #71706b;
+            --color-border: #e2ddd4;
+            --color-cream: #f0ebe1;
+            --shadow-sm: 0 1px 2px rgba(26,39,68,0.05);
+            --shadow-md: 0 2px 8px rgba(26,39,68,0.08);
+            --radius: 8px;
+            --max-width: 860px;
+        }
+
+        /* ── Base / Mobile ── */
+
+        html {
+            font-size: 137.5%; /* 22px base for easy reading */
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-size: 1rem;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero */
+        .hero {
+            background: var(--color-navy);
+            color: #fff;
+            padding: 2rem 1.25rem;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-gold-muted), var(--color-gold));
+        }
+
+        .hero-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            text-align: center;
+            gap: 1.25rem;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+        }
+
+        .hero h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-top: 0.5rem;
+        }
+
+        .hero-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--color-gold);
+            border: none;
+            margin: 1rem auto;
+        }
+
+        .hero-tagline {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.15rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        .hero-logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--color-gold);
+            flex-shrink: 0;
+        }
+
+        /* Main content */
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1.5rem 1rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--color-surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
+            padding: 1.25rem;
+        }
+
+        .card-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 1rem;
+        }
+
+        /* Structure section */
+        .structure-highlight {
+            display: inline-block;
+            background: transparent;
+            color: var(--color-navy);
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            border: 1.5px solid var(--color-gold);
+        }
+
+        .structure-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .structure-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--color-navy);
+        }
+
+        .structure-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--color-gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Quotes */
+        .quotes {
+            background: var(--color-cream);
+            border-left: 2px solid var(--color-gold);
+            border-radius: 0 6px 6px 0;
+            padding: 1rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .quotes p {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        .quotes strong {
+            font-style: normal;
+            color: var(--color-navy);
+            font-weight: 600;
+        }
+
+        /* Resource tiers */
+        .tiers {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .tier {
+            background: var(--color-surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
+            padding: 1.25rem;
+        }
+
+        .tier-header {
+            margin-bottom: 0.75rem;
+        }
+
+        .tier-badge {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.5rem 1.2rem;
+            border-radius: 4px;
+        }
+
+        .tier-badge--starter {
+            background: var(--color-cream);
+            color: var(--color-navy);
+            border: 1px solid var(--color-border);
+        }
+
+        .tier-badge--intermediate {
+            background: var(--color-cream);
+            color: var(--color-navy);
+            border: 1px solid var(--color-gold-muted);
+        }
+
+        .tier-badge--advanced {
+            background: var(--color-navy);
+            color: var(--color-gold);
+        }
+
+        .tier-links {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .tier-links li {
+            display: flex;
+        }
+
+        .tier-links a {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            border-radius: 6px;
+            background: var(--color-surface);
+            color: var(--color-navy);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 1px solid var(--color-border);
+            overflow: hidden;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .tier-links a:hover {
+            border-color: var(--color-gold);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tier-links a:active {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tier-links a .preview-thumb {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: var(--color-cream);
+            overflow: hidden;
+        }
+
+        .tier-links a .preview-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .tier-links a .link-label {
+            padding: 0.65rem 0.8rem;
+            text-align: center;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.9rem;
+        }
+
+        .tier-note {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+
+        /* Additional reading */
+        .additional {
+            margin-top: 0.5rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .additional p {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .note {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            margin-top: 1.25rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1.25rem;
+            font-size: 0.7rem;
+            color: var(--color-text-muted);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-top: 1px solid var(--color-border);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        /* ── Tablet (600px+) ── */
+        @media (min-width: 600px) {
+            body {
+                font-size: 1.05rem;
             }
-        </style>
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="jumbotron">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xs-8">
-                            <h1>Daily Devotion</h1>
-                            <h3>BRGH Quiet Time (QT)</h3>
-                            <hr>
-                            <p><small><i>To encourage a closer and deeper walk with the Lord <b>daily</b>.</i></small></p>
-                        </div>
-                        <div class="col-xs-4">
-                            <img src="images/brgh.jpg" class="img-fluid">
-                        </div>
+
+            .hero {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .hero-inner {
+                flex-direction: row;
+                text-align: left;
+                gap: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero h2 {
+                font-size: 0.85rem;
+            }
+
+            .hero-divider {
+                margin: 1.25rem 0;
+            }
+
+            .hero-tagline {
+                font-size: 1.15rem;
+            }
+
+            .hero-logo {
+                width: 220px;
+                height: 220px;
+            }
+
+            main {
+                padding: 2rem 1.5rem 3.5rem;
+                gap: 2rem;
+            }
+
+            .card, .tier {
+                padding: 1.75rem;
+            }
+
+            .card-title {
+                font-size: 1.6rem;
+            }
+
+            .structure-list {
+                flex-direction: row;
+                gap: 1.5rem;
+            }
+
+            .quotes {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .tier-links {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 1rem;
+            }
+
+            .tier-links a .link-label {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* ── Desktop (900px+) ── */
+        @media (min-width: 900px) {
+            body {
+                font-size: 1.1rem;
+            }
+
+            .hero {
+                padding: 3.5rem 1.5rem;
+            }
+
+            .hero-inner {
+                gap: 2.5rem;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero h2 {
+                font-size: 0.95rem;
+            }
+
+            .hero-divider {
+                margin: 1.5rem 0;
+            }
+
+            .hero-tagline {
+                font-size: 1.25rem;
+            }
+
+            .hero-logo {
+                width: 250px;
+                height: 250px;
+            }
+
+            main {
+                padding: 2.5rem 1.5rem 4rem;
+                gap: 2.5rem;
+            }
+
+            .card, .tier {
+                padding: 2rem;
+            }
+
+            .card-title {
+                font-size: 1.75rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .structure-highlight {
+                font-size: 0.85rem;
+            }
+
+            .structure-list li {
+                font-size: 1.1rem;
+            }
+
+            .quotes p {
+                font-size: 1.1rem;
+            }
+
+            .tier-links {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .tier-links a {
+                font-size: 0.95rem;
+            }
+
+            .tier-note {
+                font-size: 1.1rem;
+            }
+
+            .additional p,
+            .note {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <h1>Daily Devotion</h1>
+                <h2>BRGH Quiet Time</h2>
+                <hr class="hero-divider">
+                <p class="hero-tagline">To encourage a closer and deeper walk with the Lord <strong>daily</strong>.</p>
+            </div>
+            <img src="images/brgh.jpg" alt="BRGH Logo" class="hero-logo">
+        </div>
+    </header>
+
+    <main>
+        <section class="card">
+            <h3 class="card-title">Structure</h3>
+            <span class="structure-highlight">15 Minutes a Day</span>
+            <ul class="structure-list">
+                <li>Prayer</li>
+                <li>Daily Reading</li>
+            </ul>
+            <div class="quotes">
+                <p><strong>1 Thess. 5:17</strong> &mdash; &ldquo;Pray without ceasing.&rdquo;</p>
+                <p><strong>Psalm 1:2</strong> &mdash; &ldquo;But his delight is in the law of the LORD; and in his law doth he meditate day and night.&rdquo;</p>
+            </div>
+        </section>
+
+        <section>
+            <h3 class="card-title">Suggested Material (For Daily Reading)</h3>
+            <div class="tiers">
+                <div class="tier">
+                    <div class="tier-header">
+                        <span class="tier-badge tier-badge--starter">Starter</span>
                     </div>
+                    <ul class="tier-links">
+                        <li><a href="https://ourdailybread.org/read/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/ourdailybread.png" alt="Our Daily Bread preview" loading="lazy"></span><span class="link-label">Our Daily Bread</span></a></li>
+                        <li><a href="https://scriptureunion.org/encounters/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/encounters.png" alt="Encounters With God preview" loading="lazy"></span><span class="link-label">Encounters With God</span></a></li>
+                        <li><a href="https://www.spurgeon.org/resource-library/devotional-classics/morning-and-evening/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/spurgeon.png" alt="Spurgeon's Morning & Evening preview" loading="lazy"></span><span class="link-label">Spurgeon&rsquo;s Morning &amp; Evening</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="tier">
+                    <div class="tier-header">
+                        <span class="tier-badge tier-badge--intermediate">Intermediate</span>
+                    </div>
+                    <ul class="tier-links">
+                        <li><a href="https://www.preciousseed.org/dailythought.cfm" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/preciousseed.png" alt="Precious Seed preview" loading="lazy"></span><span class="link-label">Precious Seed</span></a></li>
+                        <li><a href="https://www.truthforlife.org/resources/daily-devotionals" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/truthforlife.png" alt="Truth For Life preview" loading="lazy"></span><span class="link-label">Truth For Life</span></a></li>
+                        <li><a href="https://dailylightdevotional.org/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/dailylight.png" alt="Daily Light Devotional preview" loading="lazy"></span><span class="link-label">Daily Light Devotional</span></a></li>
+                        <li><a href="https://utmost.org/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/utmost.png" alt="My Utmost For His Highest preview" loading="lazy"></span><span class="link-label">My Utmost For His Highest</span></a></li>
+                        <li><a href="https://www.ligonier.org/learn/devotionals" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/tabletalk.png" alt="Ligonier preview" loading="lazy"></span><span class="link-label">Ligonier</span></a></li>
+                        <li><a href="https://www.gty.org/library/devotionals" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/gracetoyou.png" alt="Grace to You preview" loading="lazy"></span><span class="link-label">Grace to You</span></a></li>
+                        <li><a href="https://www.thegospelcoalition.org/devotionals/read-the-bible/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/tgc.png" alt="TGC Read the Bible preview" loading="lazy"></span><span class="link-label">TGC Read the Bible</span></a></li>
+                        <li><a href="https://gospelinlife.com/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/gospelinlife.png" alt="Gospel In Life preview" loading="lazy"></span><span class="link-label">Gospel In Life</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="tier">
+                    <div class="tier-header">
+                        <span class="tier-badge tier-badge--advanced">Advanced</span>
+                    </div>
+                    <p class="tier-note">Meditate on a chapter of the Word of God a day</p>
+                    <ul class="tier-links" style="margin-top: 0.75rem;">
+                        <li><a href="https://www.esv.org/John+1/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/esv.png" alt="ESV Bible preview" loading="lazy"></span><span class="link-label">ESV Bible</span></a></li>
+                    </ul>
                 </div>
             </div>
-            <hr>
-            <div class="well">
-                <h2>Structure: </h2>
-                <h4>
-                    15 MINUTES A DAY
-                    <h4>
-                        <ul>
-                            <li>Prayer</li>
-                            <li>Daily Reading</li>
-                        </ul>
-                    </h4>
-                </h3>
-                <hr>
-                <p>
-                    <i>1 Thess. 5:17 -  "Pray without ceasing." </i>
-                </p>
-                <p>
-                    <i>Psalm 1:2 - "But his delight is in the law of the LORD; and in his law doth he meditate day and night." </i>
-                </p>
+
+            <p class="note">Should you already have your own daily devotional material, kindly continue as is.</p>
+
+            <div class="additional">
+                <p><strong>Additional recommended reading:</strong></p>
+                <ul class="tier-links">
+                    <li><a href="https://assemblytestimony.org/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/assemblytestimony.png" alt="Assembly Testimony preview" loading="lazy"></span><span class="link-label">Assembly Testimony</span></a></li>
+                    <li><a href="http://truthandtidings.com/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/truthandtidings.png" alt="Truth and Tidings preview" loading="lazy"></span><span class="link-label">Truth and Tidings</span></a></li>
+                </ul>
             </div>
-            <hr>
-            <h3>Recommendations/Suggested Material</h3>
-            <p>
-                For daily reading (devotion): 
-                <ol>
-                    <li>Starter</li>
-                    <ul>
-                        <li><a href="https://ourdailybread.org/read/">Our Daily Bread</a></li>
-                        <li><a href="https://scriptureunion.org/encounters/">Encounters With God</a></li>
-                        <li><a href="https://us1.campaign-archive.com/home/?u=05f9e85a34fd2d982c416d85f&id=e079140fac">E-Med(itations)</a></li>
-                    </ul>
-                    <li>Intermediate</li>
-                    <ul>
-                        <li><a href="https://www.preciousseed.org/dailythought.cfm">Precious Seed</a></li>
-                        <li><a href="https://www.truthforlife.org/resources/daily-devotionals">Truth For Life</a></li>
-                        <li><a href="https://dailylightdevotional.org/">Daily Light Devotional</a></li>
-                        <li><a href="https://utmost.org/">My Utmost For His Highest</a></li>
-                    </ul>
-                    <li>Advanced</li>
-                    <ul>
-                        <li>Meditate on a chapter of the Word of God a day</li>
-                    </ul>
-                </ol>
-                Should you already have your own daily devotional material, kindly continue as is.  
-                <br><br>
-                Additional recommended reading: 
-                <ol>
-                    <li><a href="https://assemblytestimony.org/">Assembly Testimony</a></li>
-                    <li><a href="http://truthandtidings.com/">Truth and Tidings</a></li>
-                </ol>
-            </p>
-            <hr>
-        </div>
-    </body>
+        </section>
+    </main>
+
+    <footer>
+        BRGH Daily Devotion
+    </footer>
+
+</body>
 </html>
