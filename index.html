@@ -227,7 +227,7 @@
             border-radius: var(--radius);
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--color-border);
-            padding: 1.25rem;
+            padding: 0.75rem;
         }
 
         .tier-header {
@@ -236,18 +236,18 @@
 
         .tier-badge {
             font-family: 'Inter', sans-serif;
-            font-size: 1.05rem;
+            font-size: 0.85rem;
             font-weight: 600;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            padding: 0.6rem 1.4rem;
+            padding: 0.25rem 0.7rem;
             border-radius: 4px;
         }
 
         .tier-badge--starter {
             background: var(--color-cream);
             color: var(--color-navy);
-            border: 1px solid var(--color-border);
+            border: 1px solid var(--color-gold-muted);
         }
 
         .tier-badge--intermediate {
@@ -259,13 +259,13 @@
         .tier-badge--advanced {
             background: var(--color-cream);
             color: var(--color-navy);
-            border: 1px solid var(--color-border);
+            border: 1px solid var(--color-gold-muted);
         }
 
         .tier-links {
             list-style: none;
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 0.75rem;
         }
 
@@ -302,7 +302,7 @@
         .tier-links a .preview-thumb {
             display: block;
             width: 100%;
-            aspect-ratio: 16 / 10;
+            aspect-ratio: 16 / 9;
             background: var(--color-cream);
             overflow: hidden;
         }
@@ -320,10 +320,10 @@
         }
 
         .tier-links a .link-label {
-            padding: 0.75rem 0.8rem;
+            padding: 0.5rem 0.6rem;
             text-align: center;
             border-top: 1.5px solid var(--color-navy);
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 600;
             background: var(--color-navy);
             color: var(--color-gold);
@@ -364,6 +364,53 @@
             font-size: 1rem;
             color: var(--color-text-muted);
             margin-top: 1.25rem;
+        }
+
+        /* Collapsible sections */
+        .collapsible-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .collapsible-toggle[aria-expanded="false"] {
+            margin-bottom: 0;
+        }
+
+        .collapsible-toggle .card-title {
+            margin-bottom: 0;
+        }
+
+        .collapsible-toggle .toggle-icon {
+            font-size: 1.1rem;
+            color: var(--color-gold);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 0.5rem;
+        }
+
+        .collapsible-toggle[aria-expanded="false"] .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.35s ease;
+        }
+
+        .collapsible-content[data-expanded="true"] {
+            grid-template-rows: 1fr;
+        }
+
+        .collapsible-inner {
+            overflow: hidden;
         }
 
         /* Footer */
@@ -451,7 +498,7 @@
             }
 
             .tier-links {
-                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
                 gap: 1rem;
             }
 
@@ -522,7 +569,7 @@
             }
 
             .tier-links {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             }
 
             .tier-links a {
@@ -556,15 +603,22 @@
 
     <main>
         <section class="card">
-            <h3 class="card-title">Structure</h3>
-            <span class="structure-highlight">15 Minutes a Day</span>
-            <ul class="structure-list">
-                <li>Prayer</li>
-                <li>Daily Reading</li>
-            </ul>
-            <div class="quotes">
-                <p><strong>1 Thess. 5:17</strong> &mdash; &ldquo;Pray without ceasing.&rdquo;</p>
-                <p><strong>Psalm 1:2</strong> &mdash; &ldquo;But his delight is in the law of the LORD; and in his law doth he meditate day and night.&rdquo;</p>
+            <button class="collapsible-toggle" aria-expanded="false" onclick="toggleSection(this)">
+                <h3 class="card-title">Structure</h3>
+                <span class="toggle-icon">&#9650;</span>
+            </button>
+            <div class="collapsible-content" data-expanded="false">
+                <div class="collapsible-inner">
+                    <span class="structure-highlight">15 Minutes a Day</span>
+                    <ul class="structure-list">
+                        <li>Prayer</li>
+                        <li>Daily Reading</li>
+                    </ul>
+                    <div class="quotes">
+                        <p><strong>1 Thess. 5:17</strong> &mdash; &ldquo;Pray without ceasing.&rdquo;</p>
+                        <p><strong>Psalm 1:2</strong> &mdash; &ldquo;But his delight is in the law of the LORD; and in his law doth he meditate day and night.&rdquo;</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -572,40 +626,55 @@
             <h3 class="card-title">Suggested Material (For Daily Reading)</h3>
             <div class="tiers">
                 <div class="tier">
-                    <div class="tier-header">
+                    <button class="collapsible-toggle" aria-expanded="false" onclick="toggleSection(this)">
                         <span class="tier-badge tier-badge--starter">Starter</span>
+                        <span class="toggle-icon">&#9650;</span>
+                    </button>
+                    <div class="collapsible-content" data-expanded="false">
+                        <div class="collapsible-inner">
+                            <ul class="tier-links">
+                                <li><a href="https://ourdailybread.org/read/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/ourdailybread.png" alt="Our Daily Bread preview" loading="lazy"></span><span class="link-label">Our Daily Bread</span></a></li>
+                                <li><a href="https://scriptureunion.org/encounters/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/encounters.png" alt="Encounters With God preview" loading="lazy"></span><span class="link-label">Encounters With God</span></a></li>
+                                <li><a href="https://www.spurgeon.org/resource-library/devotional-classics/morning-and-evening/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/spurgeon.png" alt="Spurgeon's Morning & Evening preview" loading="lazy"></span><span class="link-label">Spurgeon&rsquo;s Morning &amp; Evening</span></a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <ul class="tier-links">
-                        <li><a href="https://ourdailybread.org/read/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/ourdailybread.png" alt="Our Daily Bread preview" loading="lazy"></span><span class="link-label">Our Daily Bread</span></a></li>
-                        <li><a href="https://scriptureunion.org/encounters/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/encounters.png" alt="Encounters With God preview" loading="lazy"></span><span class="link-label">Encounters With God</span></a></li>
-                        <li><a href="https://www.spurgeon.org/resource-library/devotional-classics/morning-and-evening/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/spurgeon.png" alt="Spurgeon's Morning & Evening preview" loading="lazy"></span><span class="link-label">Spurgeon&rsquo;s Morning &amp; Evening</span></a></li>
-                    </ul>
                 </div>
 
                 <div class="tier">
-                    <div class="tier-header">
+                    <button class="collapsible-toggle" aria-expanded="false" onclick="toggleSection(this)">
                         <span class="tier-badge tier-badge--intermediate">Intermediate</span>
+                        <span class="toggle-icon">&#9650;</span>
+                    </button>
+                    <div class="collapsible-content" data-expanded="false">
+                        <div class="collapsible-inner">
+                            <ul class="tier-links">
+                                <li><a href="https://www.preciousseed.org/dailythought.cfm" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/preciousseed.png" alt="Precious Seed preview" loading="lazy"></span><span class="link-label">Precious Seed</span></a></li>
+                                <li><a href="https://www.truthforlife.org/resources/daily-devotionals" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/truthforlife.png" alt="Truth For Life preview" loading="lazy"></span><span class="link-label">Truth For Life</span></a></li>
+                                <li><a href="https://dailylightdevotional.org/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/dailylight.png" alt="Daily Light Devotional preview" loading="lazy"></span><span class="link-label">Daily Light Devotional</span></a></li>
+                                <li><a href="https://utmost.org/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/utmost.png" alt="My Utmost For His Highest preview" loading="lazy"></span><span class="link-label">My Utmost For His Highest</span></a></li>
+                                <li><a href="https://www.ligonier.org/learn/devotionals" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/tabletalk.png" alt="Ligonier preview" loading="lazy"></span><span class="link-label">Ligonier</span></a></li>
+                                <li><a href="https://www.gty.org/library/devotionals" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/gracetoyou.png" alt="Grace to You preview" loading="lazy"></span><span class="link-label">Grace to You</span></a></li>
+                                <li><a href="https://www.thegospelcoalition.org/devotionals/read-the-bible/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/tgc.png" alt="TGC Read the Bible preview" loading="lazy"></span><span class="link-label">TGC Read the Bible</span></a></li>
+                                <li><a href="https://gospelinlife.com/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/gospelinlife.png" alt="Gospel In Life preview" loading="lazy"></span><span class="link-label">Gospel In Life</span></a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <ul class="tier-links">
-                        <li><a href="https://www.preciousseed.org/dailythought.cfm" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/preciousseed.png" alt="Precious Seed preview" loading="lazy"></span><span class="link-label">Precious Seed</span></a></li>
-                        <li><a href="https://www.truthforlife.org/resources/daily-devotionals" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/truthforlife.png" alt="Truth For Life preview" loading="lazy"></span><span class="link-label">Truth For Life</span></a></li>
-                        <li><a href="https://dailylightdevotional.org/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/dailylight.png" alt="Daily Light Devotional preview" loading="lazy"></span><span class="link-label">Daily Light Devotional</span></a></li>
-                        <li><a href="https://utmost.org/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/utmost.png" alt="My Utmost For His Highest preview" loading="lazy"></span><span class="link-label">My Utmost For His Highest</span></a></li>
-                        <li><a href="https://www.ligonier.org/learn/devotionals" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/tabletalk.png" alt="Ligonier preview" loading="lazy"></span><span class="link-label">Ligonier</span></a></li>
-                        <li><a href="https://www.gty.org/library/devotionals" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/gracetoyou.png" alt="Grace to You preview" loading="lazy"></span><span class="link-label">Grace to You</span></a></li>
-                        <li><a href="https://www.thegospelcoalition.org/devotionals/read-the-bible/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/tgc.png" alt="TGC Read the Bible preview" loading="lazy"></span><span class="link-label">TGC Read the Bible</span></a></li>
-                        <li><a href="https://gospelinlife.com/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/gospelinlife.png" alt="Gospel In Life preview" loading="lazy"></span><span class="link-label">Gospel In Life</span></a></li>
-                    </ul>
                 </div>
 
                 <div class="tier">
-                    <div class="tier-header">
+                    <button class="collapsible-toggle" aria-expanded="false" onclick="toggleSection(this)">
                         <span class="tier-badge tier-badge--advanced">Advanced</span>
+                        <span class="toggle-icon">&#9650;</span>
+                    </button>
+                    <div class="collapsible-content" data-expanded="false">
+                        <div class="collapsible-inner">
+                            <p class="tier-note">Meditate on a chapter of the Word of God a day</p>
+                            <ul class="tier-links" style="margin-top: 0.75rem;">
+                                <li><a href="https://www.esv.org/John+1/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/esv.png" alt="ESV Bible preview" loading="lazy"></span><span class="link-label">ESV Bible</span></a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <p class="tier-note">Meditate on a chapter of the Word of God a day</p>
-                    <ul class="tier-links" style="margin-top: 0.75rem;">
-                        <li><a href="https://www.esv.org/John+1/" target="_blank" rel="noopener"><span class="preview-thumb"><img src="images/previews/esv.png" alt="ESV Bible preview" loading="lazy"></span><span class="link-label">ESV Bible</span></a></li>
-                    </ul>
                 </div>
             </div>
 
@@ -625,5 +694,12 @@
         BRGH Daily Devotion
     </footer>
 
+    <script>
+    function toggleSection(btn) {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !expanded);
+        btn.nextElementSibling.setAttribute('data-expanded', !expanded);
+    }
+    </script>
 </body>
 </html>
